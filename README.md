@@ -19,12 +19,14 @@ Here's how I get it running on my MacBook:
 
     git clone 
     git submodule update --init --recursive
+    # some submodules could be out of dates. please, update submodules if there are error while installing.
+    # git submodule foreach 'git fetch origin; git checkout $(git rev-parse --abbrev-ref HEAD); git reset --hard origin/$(git rev-parse --abbrev-ref HEAD); git submodule update --recursive; git clean -dfx'
     virtualenv --no-site-packages venv
     . ./venv/bin/activate
     pip install -r requirements/compiled.txt
     pip install -r requirements/dev.txt
     # Set up a mysql database
-    # Edit badgus/settings/local.py
+    # Edit badgus/settings/local-dist.py and rename the flie to local.py
     # change db credentials and add HMAC_KEYS
     ./manage.py syncdb
     ./manage.py migrate
